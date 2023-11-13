@@ -1,10 +1,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordButton: UIButton!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+
+    var passwordToUnlock = "1!gr"
 
     var isBlack: Bool = false {
         didSet {
@@ -16,16 +20,33 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func generatePassword(_ sender: Any) {
+        passwordTextField.text = passwordToUnlock
+        indicator.startAnimating()
+
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.bruteForce(passwordToUnlock: self.passwordToUnlock)
+
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                self.passwordTextField.isSecureTextEntry = false
+                self.passwordLabel.text = self.passwordToUnlock
+            }
+        }
+    }
+
+
     @IBAction func onBut(_ sender: Any) {
         isBlack.toggle()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTextField.isSecureTextEntry = true
+
         
-        
-//        self.bruteForce(passwordToUnlock: "1!gr")
-        
+//        self.bruteForce(passwordToUnlock: passwordToUnlock)
+
         // Do any additional setup after loading the view.
     }
     
@@ -39,14 +60,13 @@ class ViewController: UIViewController {
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
 //             Your stuff here
             print(password)
+
             // Your stuff here
         }
         
         print(password)
     }
 }
-
-
 
 extension String {
     var digits:      String { return "0123456789" }
@@ -55,8 +75,6 @@ extension String {
     var punctuation: String { return "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" }
     var letters:     String { return lowercase + uppercase }
     var printable:   String { return digits + letters + punctuation }
-
-
 
     mutating func replace(at index: Int, with character: Character) {
         var stringArray = Array(self)

@@ -44,7 +44,17 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Сгенерировать пароль"/>
+                                <connections>
+                                    <action selector="generatePassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="46J-p5-xcd"/>
+                                </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cUb-Nk-7Fa">
+                                <rect key="frame" x="374" y="108" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Oze-bs-745"/>
+                                    <constraint firstAttribute="width" constant="20" id="aNK-UY-huS"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ7-2v-Qs3">
                                 <rect key="frame" x="182" y="162" width="50" height="50"/>
                                 <constraints>
@@ -59,8 +69,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KER-W6-ccb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="4EX-7T-TP0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cUb-Nk-7Fa" secondAttribute="trailing" constant="20" id="708-47-342"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KER-W6-ccb" secondAttribute="trailing" constant="50" id="B10-hS-Uxo"/>
                             <constraint firstItem="3g4-cd-RKK" firstAttribute="top" secondItem="Fhg-OM-XzB" secondAttribute="bottom" constant="50" id="HQX-OS-SO9"/>
+                            <constraint firstItem="cUb-Nk-7Fa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="NC4-IP-geF"/>
                             <constraint firstItem="3g4-cd-RKK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UiX-d9-U76"/>
                             <constraint firstItem="Fhg-OM-XzB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cmo-Hu-Uuj"/>
                             <constraint firstItem="Fhg-OM-XzB" firstAttribute="top" secondItem="iQ7-2v-Qs3" secondAttribute="bottom" constant="20" id="hHo-yS-1YL"/>
@@ -72,6 +84,7 @@
                     </view>
                     <connections>
                         <outlet property="button" destination="3g4-cd-RKK" id="yGm-KB-boF"/>
+                        <outlet property="indicator" destination="cUb-Nk-7Fa" id="3xy-m9-f6C"/>
                         <outlet property="passwordButton" destination="Fhg-OM-XzB" id="wcg-Sq-Rgc"/>
                         <outlet property="passwordLabel" destination="iQ7-2v-Qs3" id="C3N-Zb-O6B"/>
                         <outlet property="passwordTextField" destination="KER-W6-ccb" id="Kzj-nl-d2e"/>
