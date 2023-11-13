@@ -2,7 +2,10 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
-    
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var passwordButton: UIButton!
+
     var isBlack: Bool = false {
         didSet {
             if isBlack {
@@ -21,7 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        self.bruteForce(passwordToUnlock: "1!gr")
+//        self.bruteForce(passwordToUnlock: "1!gr")
         
         // Do any additional setup after loading the view.
     }
