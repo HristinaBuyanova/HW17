@@ -2,6 +2,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+//    MARK: - Outlets
+
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordLabel: UILabel!
@@ -21,16 +23,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func generatePassword(_ sender: Any) {
-        passwordTextField.text = passwordToUnlock
+//        passwordTextField.text = passwordToUnlock
         indicator.startAnimating()
-
+        let text = passwordTextField.text
         DispatchQueue.global(qos: .userInteractive).async {
-            self.bruteForce(passwordToUnlock: self.passwordToUnlock)
+            if text != "" {
+                self.bruteForce(passwordToUnlock: text ?? self.passwordToUnlock)
+            } else {
+                self.bruteForce(passwordToUnlock: self.passwordToUnlock)
+            }
 
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
                 self.passwordTextField.isSecureTextEntry = false
-                self.passwordLabel.text = self.passwordToUnlock
             }
         }
     }
@@ -55,15 +60,18 @@ class ViewController: UIViewController {
 
         var password: String = ""
 
-        // Will strangely ends at 0000 instead of ~~~
-        while password != passwordToUnlock { // Increase MAXIMUM_PASSWORD_SIZE value for more
+        while password != passwordToUnlock {
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-//             Your stuff here
-            print(password)
 
-            // Your stuff here
+            DispatchQueue.main.async {
+                self.passwordLabel.text = "Пароль: \(password)"
+            }
+            print(password)
         }
-        
+
+        DispatchQueue.main.async {
+            self.passwordLabel.text = "Пароль: \(password)"
+        }
         print(password)
     }
 }
