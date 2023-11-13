@@ -9,8 +9,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordButton: UIButton!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var stopButton: UIButton!
 
     var passwordToUnlock = "1!gr"
+    var isRuningBruteForce = false
 
     var isBlack: Bool = false {
         didSet {
@@ -21,9 +23,17 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+
+//    MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        passwordTextField.isSecureTextEntry = true
+    }
+
+//    MARK: - Action
+
     @IBAction func generatePassword(_ sender: Any) {
-//        passwordTextField.text = passwordToUnlock
         indicator.startAnimating()
         let text = passwordTextField.text
         DispatchQueue.global(qos: .userInteractive).async {
@@ -40,27 +50,28 @@ class ViewController: UIViewController {
         }
     }
 
-
     @IBAction func onBut(_ sender: Any) {
         isBlack.toggle()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        passwordTextField.isSecureTextEntry = true
 
-        
-//        self.bruteForce(passwordToUnlock: passwordToUnlock)
-
-        // Do any additional setup after loading the view.
+    @IBAction func stopGeneratePassword(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.passwordLabel.text = "Подбор пароля был остановлен"
+        }
+        isRuningBruteForce = false
     }
     
+
+//    MARK: - Password selection func
+
     func bruteForce(passwordToUnlock: String) {
         let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
-
         var password: String = ""
-
+        isRuningBruteForce = true
         while password != passwordToUnlock {
+
+            guard isRuningBruteForce else { break }
+
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
 
             DispatchQueue.main.async {
@@ -69,9 +80,9 @@ class ViewController: UIViewController {
             print(password)
         }
 
-        DispatchQueue.main.async {
-            self.passwordLabel.text = "Пароль: \(password)"
-        }
+//        DispatchQueue.main.async {
+//            self.passwordLabel.text = "Пароль: \(password)"
+//        }
         print(password)
     }
 }
