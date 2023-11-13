@@ -28,6 +28,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTapGestureToHideKeyboard()
         passwordTextField.isSecureTextEntry = true
     }
 
@@ -56,11 +57,20 @@ class ViewController: UIViewController {
 
     @IBAction func stopGeneratePassword(_ sender: Any) {
         DispatchQueue.main.async {
-            self.passwordLabel.text = "Подбор пароля был остановлен"
+            self.passwordLabel.text = "Пароль не взломан"
         }
         isRuningBruteForce = false
     }
-    
+
+    func addTapGestureToHideKeyboard() {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture))
+            view.addGestureRecognizer(tapGesture)
+        }
+
+    @objc func tapGesture() {
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.resignFirstResponder()
+        }
 
 //    MARK: - Password selection func
 
@@ -79,10 +89,6 @@ class ViewController: UIViewController {
             }
             print(password)
         }
-
-//        DispatchQueue.main.async {
-//            self.passwordLabel.text = "Пароль: \(password)"
-//        }
         print(password)
     }
 }
