@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pr2503" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3g4-cd-RKK">
+                                <rect key="frame" x="135.5" y="346" width="143" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="MuE-Gw-VY6"/>
+                                    <constraint firstAttribute="height" constant="44" id="kLa-Fl-PFN"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Поменять цвет"/>
+                                <connections>
+                                    <action selector="onBut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XD4-sb-XPE"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KER-W6-ccb">
+                                <rect key="frame" x="50" y="98" width="314" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="LuD-0X-pvB"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fhg-OM-XzB">
+                                <rect key="frame" x="121" y="232" width="172" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="y2I-2U-YMQ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Подобрать пароль"/>
+                                <connections>
+                                    <action selector="generatePassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="46J-p5-xcd"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cUb-Nk-7Fa">
+                                <rect key="frame" x="374" y="108" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Oze-bs-745"/>
+                                    <constraint firstAttribute="width" constant="20" id="aNK-UY-huS"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhg-CR-iOm">
+                                <rect key="frame" x="169.5" y="296" width="75" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="DOB-Vc-Mk7"/>
+                                    <constraint firstAttribute="width" constant="75" id="Kb5-5U-J8U"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Стоп">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                    </backgroundConfiguration>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="stopGeneratePassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XSw-Ox-ZUD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль: ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ7-2v-Qs3">
+                                <rect key="frame" x="158.5" y="162" width="97.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="uEH-5V-o32"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" systemColor="systemIndigoColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KER-W6-ccb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="4EX-7T-TP0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cUb-Nk-7Fa" secondAttribute="trailing" constant="20" id="708-47-342"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KER-W6-ccb" secondAttribute="trailing" constant="50" id="B10-hS-Uxo"/>
+                            <constraint firstItem="Nhg-CR-iOm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DKK-K8-wjI"/>
+                            <constraint firstItem="3g4-cd-RKK" firstAttribute="top" secondItem="Fhg-OM-XzB" secondAttribute="bottom" constant="70" id="HQX-OS-SO9"/>
+                            <constraint firstItem="cUb-Nk-7Fa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="NC4-IP-geF"/>
+                            <constraint firstItem="3g4-cd-RKK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UiX-d9-U76"/>
+                            <constraint firstItem="Fhg-OM-XzB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cmo-Hu-Uuj"/>
+                            <constraint firstItem="Fhg-OM-XzB" firstAttribute="top" secondItem="iQ7-2v-Qs3" secondAttribute="bottom" constant="20" id="hHo-yS-1YL"/>
+                            <constraint firstItem="KER-W6-ccb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="iJ1-7P-APj"/>
+                            <constraint firstItem="iQ7-2v-Qs3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j4R-kb-i9T"/>
+                            <constraint firstItem="Nhg-CR-iOm" firstAttribute="top" secondItem="Fhg-OM-XzB" secondAttribute="bottom" constant="20" id="m16-1Q-ZVi"/>
+                            <constraint firstItem="iQ7-2v-Qs3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="q8q-cc-PG6"/>
+                            <constraint firstItem="iQ7-2v-Qs3" firstAttribute="top" secondItem="KER-W6-ccb" secondAttribute="bottom" constant="20" id="uZG-Br-Egp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="3g4-cd-RKK" id="yGm-KB-boF"/>
+                        <outlet property="indicator" destination="cUb-Nk-7Fa" id="3xy-m9-f6C"/>
+                        <outlet property="passwordButton" destination="Fhg-OM-XzB" id="wcg-Sq-Rgc"/>
+                        <outlet property="passwordLabel" destination="iQ7-2v-Qs3" id="C3N-Zb-O6B"/>
+                        <outlet property="passwordTextField" destination="KER-W6-ccb" id="Kzj-nl-d2e"/>
+                        <outlet property="stopButton" destination="Nhg-CR-iOm" id="6Cc-fi-vv7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="96.428571428571431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

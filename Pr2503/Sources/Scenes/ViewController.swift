@@ -1,8 +1,19 @@
 import UIKit
 
 class ViewController: UIViewController {
+
+//    MARK: - Outlets
+
     @IBOutlet weak var button: UIButton!
-    
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var passwordButton: UIButton!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var stopButton: UIButton!
+
+    var passwordToUnlock = "1!gr"
+    var isRuningBruteForce = false
+
     var isBlack: Bool = false {
         didSet {
             if isBlack {
@@ -12,38 +23,75 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+
+//    MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addTapGestureToHideKeyboard()
+        passwordTextField.isSecureTextEntry = true
+    }
+
+//    MARK: - Action
+
+    @IBAction func generatePassword(_ sender: Any) {
+        indicator.startAnimating()
+        let text = passwordTextField.text
+        DispatchQueue.global(qos: .userInteractive).async {
+            if text != "" {
+                self.bruteForce(passwordToUnlock: text ?? self.passwordToUnlock)
+            } else {
+                self.bruteForce(passwordToUnlock: self.passwordToUnlock)
+            }
+
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                self.passwordTextField.isSecureTextEntry = false
+            }
+        }
+    }
+
     @IBAction func onBut(_ sender: Any) {
         isBlack.toggle()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        self.bruteForce(passwordToUnlock: "1!gr")
-        
-        // Do any additional setup after loading the view.
+
+    @IBAction func stopGeneratePassword(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.passwordLabel.text = "Пароль не взломан"
+        }
+        isRuningBruteForce = false
     }
-    
+
+    func addTapGestureToHideKeyboard() {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture))
+            view.addGestureRecognizer(tapGesture)
+        }
+
+    @objc func tapGesture() {
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.resignFirstResponder()
+        }
+
+//    MARK: - Password selection func
+
     func bruteForce(passwordToUnlock: String) {
         let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
-
         var password: String = ""
+        isRuningBruteForce = true
+        while password != passwordToUnlock {
 
-        // Will strangely ends at 0000 instead of ~~~
-        while password != passwordToUnlock { // Increase MAXIMUM_PASSWORD_SIZE value for more
+            guard isRuningBruteForce else { break }
+
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-//             Your stuff here
+
+            DispatchQueue.main.async {
+                self.passwordLabel.text = "Пароль: \(password)"
+            }
             print(password)
-            // Your stuff here
         }
-        
         print(password)
     }
 }
-
-
 
 extension String {
     var digits:      String { return "0123456789" }
@@ -52,8 +100,6 @@ extension String {
     var punctuation: String { return "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" }
     var letters:     String { return lowercase + uppercase }
     var printable:   String { return digits + letters + punctuation }
-
-
 
     mutating func replace(at index: Int, with character: Character) {
         var stringArray = Array(self)
